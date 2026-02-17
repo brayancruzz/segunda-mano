@@ -1,0 +1,15 @@
+.input-search{
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 22px;
+    width: 100%;
+    border-color: #CFD8DC;
+    border-style: solid;
+}
+
+.input-search-container {
+    width: 100%;
+    max-width: 450px;
+}

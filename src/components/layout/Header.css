@@ -1,0 +1,38 @@
+.header {
+    padding: 24px;
+    background: white;
+    height: auto;
+  }
+  
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+}     
+
+.navigation {  
+    display: flex;
+    gap: 10px;
+}
+
+.logo-title {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.logo-description {
+    font-size: 12px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}

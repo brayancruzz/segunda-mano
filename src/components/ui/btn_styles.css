@@ -1,0 +1,19 @@
+.btn-primary {
+    font-size: 14px;
+    background-color: white;
+    color: #00838F;
+    border: none;
+    height: 40px;
+    padding: 12px 20px;
+    border-radius: 12px;
+}  
+
+.btn-secondary {
+    font-size: 14px;
+    background-color: #00838F;
+    color: white;
+    border: none;
+    height: 40px;
+    padding: 12px 20px;
+    border-radius: 12px;
+}
