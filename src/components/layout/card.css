@@ -1,9 +1,33 @@
 .card {
     background-color: white;
     border-radius: 12px;
-    min-width: 300px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    padding-top: 6px;
 }
 
 .title{
-    size: 16px;   
+    font-size: 18px;   
+    margin: 0;
+    padding: 0;
+}
+
+.description{
+    font-size: 12px;   
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
 }

@@ -5,8 +5,11 @@ function Card({ title, description, image }) {
     return (
       <div className="card">
         <img src={image} alt={title} />
-        <h3 className='blue_gray_900 title'>{title}</h3>
-        <p>{description}</p>
+        <div className='content'>
+          <h3 className='blue_gray_900 title'>{title}</h3>
+          <p className='description blue_gray_800'>{description}</p>
+          {/* <p className='price teal_800'>{price}</p> */}
+        </div>
       </div>
     );
   }
