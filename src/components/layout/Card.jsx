@@ -1,8 +1,11 @@
+import './card.css';
+import '../ui/color.css';
+
 function Card({ title, description, image }) {
     return (
       <div className="card">
         <img src={image} alt={title} />
-        <h3>{title}</h3>
+        <h3 className='blue_gray_900 title'>{title}</h3>
         <p>{description}</p>
       </div>
     );
