@@ -38,6 +38,12 @@ function Home() {
             image="https://placehold.co/400?text=Hello+World&font=roboto"
             price="$12.000"
         />
+        <Card
+          title="Zapatos Nike"
+          description="Talla 38"
+          image="https://placehold.co/400?text=Hello+World&font=roboto"
+          price="$12.000"
+      />
         </div>
       </div>
     </section>

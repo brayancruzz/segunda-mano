@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -34,6 +40,7 @@ body {
   gap: 22px;
   max-width: 1200px;
   margin: auto;
+  margin-top: 100px;
 }
 
 .main_container{
@@ -42,13 +49,28 @@ body {
 
 .products_list_container {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
+  justify-content: flex-start;
+}
+
+/* Todas las cards con la misma medida (1/5 del ancho), alineadas a la izquierda */
+.products_list_container > .card {
+  flex: 0 0 calc((100% - 12px * 4) / 5);
+  min-width: 200px;
+  max-width: none;
 }
 
 h2 {
   margin: 0;
   padding: 0;
 }
+
+.price {
+  margin: 0;
+  padding: 0;
+}
+
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

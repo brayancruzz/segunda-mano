@@ -1,7 +1,10 @@
 .header {
+    box-sizing: border-box;
     padding: 24px;
     background: white;
     height: auto;
+    position: fixed;
+    width: 100%;
   }
   
 .header-container {
