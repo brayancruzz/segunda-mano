@@ -47,19 +47,6 @@ body {
   padding: 32px;
 }
 
-.products_list_container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: flex-start;
-}
-
-/* Todas las cards con la misma medida (1/5 del ancho), alineadas a la izquierda */
-.products_list_container > .card {
-  flex: 0 0 calc((100% - 12px * 4) / 5);
-  min-width: 200px;
-  max-width: none;
-}
 
 h2 {
   margin: 0;

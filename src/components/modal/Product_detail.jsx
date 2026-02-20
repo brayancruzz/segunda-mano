@@ -1,11 +1,6 @@
 import './product_detail.css';
 import '../ui/color.css';
 
-// Modal de detalle de producto
-// Props:
-// - isOpen: boolean para mostrar/ocultar
-// - onClose: función para cerrar
-// - product: { title, description, image, price }
 function ProductDetailModal({ isOpen, onClose, product }) {
   if (!isOpen || !product) return null;
 
