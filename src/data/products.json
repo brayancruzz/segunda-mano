@@ -1,0 +1,173 @@
+[
+    {
+      "id": 1,
+      "title": "iPhone 13",
+      "description": "Excelente estado, pantalla sin rayones",
+      "condition": "Buen estado",
+      "price": "$12.000",
+      "image": "https://placehold.co/400?text=iPhone+13&font=roboto",
+      "url_contact": "https://wa.me/573001234567",
+      "product_id": "prd_001",
+      "seller": {
+        "id": "usr_001",
+        "nombre": "Carlos Pérez",
+        "email": "carlos@example.com",
+        "phone": "+573001234567"
+      },
+      "ubicacion": "Bogotá"
+    },
+    {
+      "id": 2,
+      "title": "Zapatos Nike Air",
+      "description": "Talla 38, un poco usados",
+      "condition": "Buen estado",
+      "price": "$120.000",
+      "image": "https://placehold.co/400?text=Zapatos+Nike+Air&font=roboto",
+      "url_contact": "https://wa.me/573002345678",
+      "product_id": "prd_002",
+      "seller": {
+        "id": "usr_002",
+        "nombre": "Ana Gómez",
+        "email": "ana@example.com",
+        "phone": "+573002345678"
+      },
+      "ubicacion": "Fusagasugá"
+    },
+    {
+      "id": 3,
+      "title": "MacBook Pro 2020",
+      "description": "Muy buen estado, batería nueva",
+      "condition": "Excelente",
+      "price": "$4.500.000",
+      "image": "https://placehold.co/400?text=MacBook+Pro&font=roboto",
+      "url_contact": "https://wa.me/573003456789",
+      "product_id": "prd_003",
+      "seller": {
+        "id": "usr_003",
+        "nombre": "Juan Rodríguez",
+        "email": "juan@example.com",
+        "phone": "+573003456789"
+      },
+      "ubicacion": "Silvania"
+    },
+    {
+      "id": 4,
+      "title": "Cámara Canon EOS",
+      "description": "Usada, lentes incluidos",
+      "condition": "Buen estado",
+      "price": "$2.200.000",
+      "image": "https://placehold.co/400?text=Canon+EOS&font=roboto",
+      "url_contact": "https://wa.me/573004567890",
+      "product_id": "prd_004",
+      "seller": {
+        "id": "usr_004",
+        "nombre": "María Fernández",
+        "email": "maria@example.com",
+        "phone": "+573004567890"
+      },
+      "ubicacion": "Pasca"
+    },
+    {
+      "id": 5,
+      "title": "Audífonos Bose",
+      "description": "Casi nuevos, caja original",
+      "condition": "Excelente",
+      "price": "$350.000",
+      "image": "https://placehold.co/400?text=Bose+Headphones&font=roboto",
+      "url_contact": "https://wa.me/573005678901",
+      "product_id": "prd_005",
+      "seller": {
+        "id": "usr_005",
+        "nombre": "Sofía Martínez",
+        "email": "sofia@example.com",
+        "phone": "+573005678901"
+      },
+      "ubicacion": "Bogotá"
+    },
+    {
+      "id": 6,
+      "title": "Reloj Apple Watch",
+      "description": "Series 6, buen estado, sin rayones",
+      "condition": "Buen estado",
+      "price": "$1.200.000",
+      "image": "https://placehold.co/400?text=Apple+Watch&font=roboto",
+      "url_contact": "https://wa.me/573006789012",
+      "product_id": "prd_006",
+      "seller": {
+        "id": "usr_006",
+        "nombre": "Pedro Castillo",
+        "email": "pedro@example.com",
+        "phone": "+573006789012"
+      },
+      "ubicacion": "Fusagasugá"
+    },
+    {
+      "id": 7,
+      "title": "Bicicleta MTB",
+      "description": "Ruedas 29, usada pero funcional",
+      "condition": "Regular",
+      "price": "$850.000",
+      "image": "https://placehold.co/400?text=Bicicleta+MTB&font=roboto",
+      "url_contact": "https://wa.me/573007890123",
+      "product_id": "prd_007",
+      "seller": {
+        "id": "usr_007",
+        "nombre": "Laura Jiménez",
+        "email": "laura@example.com",
+        "phone": "+573007890123"
+      },
+      "ubicacion": "Silvania"
+    },
+    {
+      "id": 8,
+      "title": "PS5",
+      "description": "Consola con 2 controles, casi nueva",
+      "condition": "Excelente",
+      "price": "$3.500.000",
+      "image": "https://placehold.co/400?text=PS5&font=roboto",
+      "url_contact": "https://wa.me/573008901234",
+      "product_id": "prd_008",
+      "seller": {
+        "id": "usr_008",
+        "nombre": "Diego López",
+        "email": "diego@example.com",
+        "phone": "+573008901234"
+      },
+      "ubicacion": "Pasca"
+    },
+    {
+      "id": 9,
+      "title": "Smart TV Samsung 55\"",
+      "description": "Buen estado, incluye soporte",
+      "condition": "Buen estado",
+      "price": "$2.100.000",
+      "image": "https://placehold.co/400?text=Smart+TV+Samsung&font=roboto",
+      "url_contact": "https://wa.me/573009012345",
+      "product_id": "prd_009",
+      "seller": {
+        "id": "usr_009",
+        "nombre": "Camila Torres",
+        "email": "camila@example.com",
+        "phone": "+573009012345"
+      },
+      "ubicacion": "Bogotá"
+    },
+    {
+      "id": 10,
+      "title": "Teclado Mecánico",
+      "description": "RGB, usado 1 mes",
+      "condition": "Excelente",
+      "price": "$180.000",
+      "image": "https://placehold.co/400?text=Teclado+Mecanico&font=roboto",
+      "url_contact": "https://wa.me/573010123456",
+      "product_id": "prd_010",
+      "seller": {
+        "id": "usr_010",
+        "nombre": "Julián Ramírez",
+        "email": "julian@example.com",
+        "phone": "+573010123456"
+      },
+      "ubicacion": "Fusagasugá"
+    }
+  ]
+  
