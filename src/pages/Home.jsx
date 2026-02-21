@@ -1,5 +1,5 @@
 import ProductList from "../components/products/product_list";
-
+import '../components/page_css/root.css';
 import '../components/ui/color.css';
 
 function Home() {

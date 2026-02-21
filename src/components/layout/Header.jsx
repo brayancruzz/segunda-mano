@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './Header.css';
 import '../ui/btn_styles.css';
 import '../ui/color.css';
@@ -8,7 +9,7 @@ function Header() {
       <header className="header">
         <div className="header-container">
         <div className="logo-container">
-          <h1 className="logo-title blue_gray_900">Segunda Mano</h1>
+          <Link to="/" style={{textDecoration: 'none'}}><h1 className="logo-title blue_gray_900">Segunda Mano</h1></Link>
           <p className="logo-description blue_gray_800">Compra y vende fácil</p>
         </div>
         <div className='input-search-container'>
@@ -16,8 +17,8 @@ function Header() {
         </div>
   
         <nav className="navigation">
-          <button className="btn-primary">Iniciar sesión</button>
-          <button className="btn-secondary">Registrarse</button>
+          <Link to="/"><button className="btn-primary">Iniciar sesión</button></Link>
+          <Link to="/signup"><button className="btn-secondary">Registrarse</button></Link>
         </nav>
         </div>
       </header>
