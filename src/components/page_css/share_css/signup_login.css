@@ -1,0 +1,32 @@
+  
+  .signup_login_container{
+    display: flex;
+    margin-top: 100px;
+    justify-content: space-between;
+}
+  
+  .form_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form_field label {
+    font-size: 14px;
+  }
+  
+  .signup_login_btn {
+    margin-top: 8px;
+    cursor: pointer;
+  }
+  
+  .signup_login-link {
+    text-align: center;
+    font-size: 14px;
+    margin: 0;
+  }
+  
+  .signup_login-link a {
+    font-weight: 600;
+    text-decoration: none;
+  }

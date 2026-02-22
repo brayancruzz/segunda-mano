@@ -1,8 +1,8 @@
-.signup_container {
-    max-width: 420px;
+.login_container {
+    width: 100%;
   }
   
-  .signup_form {
+  .login_form {
     display: flex;
     flex-direction: column;
     gap: 20px;

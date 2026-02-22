@@ -4,6 +4,7 @@ import "../components/ui/color.css";
 import "../components/ui/input.css";
 import "../components/ui/btn_styles.css";
 import "../components/page_css/signup.css"
+import "../components/page_css/share_css/signup_login.css"
 
 function Signup() {
   return (
@@ -56,7 +57,7 @@ function Signup() {
           </button>
         </form>
         <p className="signup_login-link blue_gray_800">
-          ¿Ya tienes cuenta? <Link to="/" className="teal_800">Iniciar sesión</Link>
+          ¿Ya tienes cuenta? <Link to="/login" className="teal_800">Iniciar sesión</Link>
         </p>
       </div>
     </section>
