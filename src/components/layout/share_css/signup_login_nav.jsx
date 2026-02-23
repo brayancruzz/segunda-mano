@@ -1,19 +1,33 @@
-import "../share_css/signup_login_nav.css"
-import { Link } from "react-router-dom";
+import "../share_css/signup_login_nav.css";
+import { NavLink } from "react-router-dom";
 
-function NavSignupLogin () {
-    return (
-        <section>
-            <ul className="navAccessOptions">
-                <li className="navAccessOption" to="/login">
-                    Iniciar sesión
-                </li>
-                <li className="navAccessOption" to="/signup">
-                    Registrarme
-                </li>
-            </ul>
-        </section>
-    )
+function NavSignupLogin() {
+  return (
+    <section className="navAccessOptionsWrapper">
+      <ul className="navAccessOptions">
+        <li>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `navAccessOption ${isActive ? "navAccessOption--active" : ""}`
+            }
+          >
+            Iniciar sesión
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="/signup"
+            className={({ isActive }) =>
+              `navAccessOption ${isActive ? "navAccessOption--active" : ""}`
+            }
+          >
+            Registrarme
+          </NavLink>
+        </li>
+      </ul>
+    </section>
+  );
 }
 
-export default NavSignupLogin
+export default NavSignupLogin;

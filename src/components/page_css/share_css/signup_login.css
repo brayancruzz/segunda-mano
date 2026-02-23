@@ -1,38 +1,42 @@
 .signup_login_main_container {
-    padding: 0 !important;
-    /* Espacio para el header fijo (~altura del header) */
-    padding-top: 72px !important;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .signup_login_container {
-    display: flex;
-    margin-top: 0;
-    justify-content: space-between;
-    min-height: calc(100vh - 72px);
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
 }
-  
-  .form_field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .form_field label {
-    font-size: 14px;
-  }
-  
-  .signup_login_btn {
-    margin-top: 8px;
-    cursor: pointer;
-  }
-  
-  .signup_login-link {
-    text-align: center;
-    font-size: 14px;
-    margin: 0;
-  }
-  
-  .signup_login-link a {
-    font-weight: 600;
-    text-decoration: none;
-  }
+
+.form_field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form_field label {
+  font-size: 14px;
+}
+
+.signup_login_btn {
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.signup_login-link {
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+.signup_login-link a {
+  font-weight: 600;
+  text-decoration: none;
+}
+

@@ -1,9 +1,0 @@
-.signup_container {
-    max-width: 420px;
-  }
-  
-  .signup_form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
