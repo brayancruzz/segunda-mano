@@ -1,5 +1,7 @@
 .login_container {
     width: 100%;
+    padding: 32px;
+    align-content: center;
   }
   
   .login_form {

@@ -1,8 +1,14 @@
-  
-  .signup_login_container{
+.signup_login_main_container {
+    padding: 0 !important;
+    /* Espacio para el header fijo (~altura del header) */
+    padding-top: 72px !important;
+}
+
+.signup_login_container {
     display: flex;
-    margin-top: 100px;
+    margin-top: 0;
     justify-content: space-between;
+    min-height: calc(100vh - 72px);
 }
   
   .form_field {

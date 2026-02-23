@@ -1,0 +1,19 @@
+.navAccessOptions{
+    display: flex;
+    text-decoration: none;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0px;
+    gap: 12px;
+}
+
+.navAccessOption{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    padding: 12px;
+    width: 100% ;
+    list-style-type: none;
+    border-radius: 12px;
+    background-color: #B2DFDB;
+}

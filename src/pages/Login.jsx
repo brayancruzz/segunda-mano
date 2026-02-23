@@ -6,13 +6,15 @@ import "../components/ui/btn_styles.css";
 import "../components/page_css/login.css"
 import "../components/page_css/share_css/signup_login.css"
 import InfoAccessBanner from "../components/layout/share_css/signup_login_banner";
+import NavSignupLogin from "../components/layout/share_css/signup_login_nav";
 
 function Login() {
   return (
-    <section className="main_container">
+    <section className="signup_login_main_container main_container">
       <div className="signup_login_container">
         <InfoAccessBanner/>
         <div className="login_container">
+          <NavSignupLogin/>
           <h2 className="blue_gray_900">Iniciar sesión</h2>
           <form className="login_form">
             <div className="form_field">
