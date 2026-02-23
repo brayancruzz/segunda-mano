@@ -17,7 +17,7 @@
 .form_field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 
 .form_field label {
@@ -40,3 +40,6 @@
   text-decoration: none;
 }
 
+.signup_login_btn {
+  margin-top: 16px;
+}

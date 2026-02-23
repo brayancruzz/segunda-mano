@@ -59,7 +59,7 @@ function AuthForm({ submitLabel, variant }) {
         </div>
       )}
 
-      <button type="submit" className="btn-secondary signup_btn">
+      <button type="submit" className="btn-secondary signup_login_btn">
         {submitLabel}
       </button>
     </form>

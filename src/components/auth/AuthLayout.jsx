@@ -15,7 +15,8 @@ function AuthLayout({ heading, children, footerText, footerLinkTo, footerLinkLab
         <InfoAccessBanner />
         <div className="auth_container">
           <div className="auth_content">
-            <NavSignupLogin />
+          <NavSignupLogin />
+          <div className="auth_form">
             {heading && <h2 className="blue_gray_900">{heading}</h2>}
             {children}
             {footerText && footerLinkTo && footerLinkLabel && (
@@ -26,6 +27,7 @@ function AuthLayout({ heading, children, footerText, footerLinkTo, footerLinkLab
                 </Link>
               </p>
             )}
+          </div>
           </div>
         </div>
       </div>

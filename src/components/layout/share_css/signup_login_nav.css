@@ -1,8 +1,9 @@
 .navAccessOptionsWrapper {
-  border-radius: 12px;
+  border-radius: 200px;
   padding: 4px;
   width: 100%;
-  background-color: #e0e0e0;
+  background-color: #00838f1f;
+  margin-bottom: 32px;
 }
 
 .navAccessOptions {
@@ -13,6 +14,7 @@
   margin: 0;
   list-style: none;
   gap: 6px;
+  font-size: 14px;
 }
 
 .navAccessOptions li {
@@ -25,21 +27,23 @@
   align-items: center;
   padding: 12px;
   width: 100%;
-  border-radius: 12px;
-  background-color: #B2DFDB;
+  border-radius: 200px;
+  background-color: #00838f1f;
   text-decoration: none;
   color: inherit;
-  font-weight: 500;
+  font-weight: 400;
+  height: 40px;
 }
 
 .navAccessOption:hover,
 .navAccessOption:focus,
 .navAccessOption:visited {
   text-decoration: none;
+  color: white;
 }
 
 .navAccessOption--active {
-  background-color: #00796B;
+  background-color: #00838F;
   color: #FFFFFF;
   text-decoration: none;
 }
