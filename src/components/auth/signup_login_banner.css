@@ -1,0 +1,31 @@
+.signup_login_banner{
+  width: 50%;
+  flex: 0 0 50%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.bubble_s{
+  width: 200px;
+  height: 200px;
+  background-color: rgb(77, 110, 61);
+  border-radius: 200px;
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  z-index: 20;
+}
+
+.bubble_m{
+  width: 400px;
+  height: 400px;
+  background-color:bisque;
+  border-radius: 200px;
+  position: absolute;
+  z-index: 0;
+}
+
+.right{
+  top: -20px;
+  right: -20px; 
+}

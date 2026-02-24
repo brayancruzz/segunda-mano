@@ -3,10 +3,10 @@ import "../page_css/root.css";
 import "../ui/color.css";
 import "../ui/input.css";
 import "../ui/btn_styles.css";
-import "../page_css/share_css/signup_login.css";
+import "../auth/signup_login.css";
 import "./auth.css";
-import InfoAccessBanner from "../layout/share_css/signup_login_banner";
-import NavSignupLogin from "../layout/share_css/signup_login_nav";
+import InfoAccessBanner from "./signup_login_banner";
+import NavSignupLogin from "./signup_login_nav";
 
 function AuthLayout({ heading, children, footerText, footerLinkTo, footerLinkLabel }) {
   return (

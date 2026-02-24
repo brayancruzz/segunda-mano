@@ -1,4 +1,4 @@
-import "../share_css/signup_login_nav.css";
+import "./signup_login_nav.css";
 import { NavLink } from "react-router-dom";
 
 function NavSignupLogin() {

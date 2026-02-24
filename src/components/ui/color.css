@@ -15,8 +15,15 @@
 }
 
 
+/* CYAN */
+
+.background_cyan_800 {
+    background-color: #00838F;
+}
+
 /* WHITE */
 
 .white {
     background-color: white;
 }
+
