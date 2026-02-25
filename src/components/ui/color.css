@@ -17,8 +17,24 @@
 
 /* CYAN */
 
+.background_cyan_500{
+    background-color: #00BCD4;
+}
+
+.background_cyan_600{
+    background-color: #00ACC1;
+}
+
+.background_cyan_700{
+    background-color: #0097A7;
+}
+
 .background_cyan_800 {
     background-color: #00838F;
+}
+
+.background_cyan_900{
+    background-color: #006064;
 }
 
 /* WHITE */
@@ -27,3 +43,6 @@
     background-color: white;
 }
 
+.font-white  {
+    color: white;
+}

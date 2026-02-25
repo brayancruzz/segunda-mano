@@ -3,15 +3,13 @@ import './Header.css';
 import '../ui/btn_styles.css';
 import '../ui/color.css';
 import '../ui/input.css';
+import LogoS from '../logo/logo_s';
 
 function Header() {
     return (
       <header className="header">
         <div className="header-container">
-        <div className="logo-container">
-          <Link to="/" style={{textDecoration: 'none'}}><h1 className="logo-title blue_gray_900">Segunda Mano</h1></Link>
-          <p className="logo-description blue_gray_800">Compra y vende fácil</p>
-        </div>
+          <LogoS/>
         <div className='input-search-container'>
           <input type="text" placeholder='Buscar articulo' className='input-search'/>
         </div>

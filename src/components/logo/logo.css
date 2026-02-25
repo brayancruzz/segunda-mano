@@ -1,0 +1,33 @@
+/* LOGO SIZE S */
+
+.logo-title-s{
+    font-size: 24px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.logo-description-s{
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* LOGO SIZE M */
+
+.logo-title-m{
+    font-size: 32px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.logo-description-m{
+    font-size: 16px;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* LOGO SIZE L */
+
+.logo-container-m{
+    gap: 0px
+}
