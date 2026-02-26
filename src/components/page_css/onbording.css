@@ -1,0 +1,22 @@
+.backgroundOnbording{
+    width: 100%;
+    flex: 0 0 50%;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.onbordingFormContainer{
+    background-color: white;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+    min-height: 800px;
+    position: relative; 
+    margin: auto;
+    border-radius: 12px;
+    padding: 32px;
+}

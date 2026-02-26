@@ -5,9 +5,9 @@ function Login() {
   return (
     <AuthLayout
       heading="Iniciar sesión"
-      footerText="¿Aún no tienes una cuenta?"
+      footerText="Olvidaste tu contraseña?"
       footerLinkTo="/signup"
-      footerLinkLabel="Registrarme"
+      footerLinkLabel="Recuperar contraseña"
     >
       <AuthForm submitLabel="Iniciar sesión" variant="login" />
     </AuthLayout>

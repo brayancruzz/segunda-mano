@@ -1,20 +1,12 @@
 import "./signup_login_banner.css"
 import "../ui/color.css"
 import LogoM from "../logo/logo_m";
+import BackgroundBubble from "../ui/background/backgroundBubbles";
 
 function InfoAccessBanner() {
     return (
-        <section className='signup_login_banner background_cyan_800'>
-            <div className="bubbles">
-                <div className="bubble_m left-top background_cyan_500"></div>
-                <div className="bubble_m right-top background_cyan_700">
-                    <div className="bubble_s left-bottom background_cyan_600"></div>
-                </div>
-                <div className="bubble_l left-bottom background_cyan_900">
-                    <div className="bubble_m right-top background_cyan_700"></div>
-                </div>
-                <div className="bubble_s right-bottom background_cyan_700"></div>
-            </div>
+        <section className='signup_login_banner'>
+            <BackgroundBubble/>
             <div className="title_descrition_page">
                 <LogoM/>
                 <div className="tit-des-container">

@@ -12,3 +12,4 @@ function LogoS() {
   }
 
   export default LogoS
+  

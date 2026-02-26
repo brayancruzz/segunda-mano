@@ -1,0 +1,149 @@
+.backgroundBubbleColor {
+  background: linear-gradient(135deg, #00acc1, #006064);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0; 
+}
+
+.bubbles{
+    width: 100%;
+    overflow: hidden;
+}
+
+.bubble_xs{
+  width: 100px;
+  height: 100px;
+  border-radius: 200px;
+  position: absolute;
+  z-index: 1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bubble_s{
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  position: absolute;
+  z-index: 1;
+  animation: float 8s ease-in-out infinite;
+}
+
+.bubble_m{
+  width: 300px;
+  height: 300px;
+  border-radius: 200px;
+  position: absolute;
+  z-index: 0;
+  animation: float 10s ease-in-out infinite;
+}
+
+.bubble_l{
+  width: 500px;
+  height: 500px;
+  border-radius: 2000px;
+  position: absolute;
+  z-index: 0;
+  animation: float 14s ease-in-out infinite;
+}
+
+
+.right-top{
+  top: -30px;
+  right: -30px; 
+}
+
+.left-bottom{
+  bottom: -80px;
+  left: -80px; 
+}
+
+.right-bottom{
+  bottom: -50px;
+  right: -50px; 
+}
+
+.left-top{
+  top: -60px;
+  left: -60px; 
+}
+
+.right {
+  right: -30px;
+  top: 50%;
+}
+
+.center{
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+}
+
+.center-left{
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  left: 50%;
+}
+
+/* =========================================
+   ESTILOS RESPONSIVE (MÓVILES Y TABLETS)
+   ========================================= */
+
+   @media (max-width: 768px) {
+    .bubble_xs {
+      width: 60px;
+      height: 60px;
+    }
+  
+    .bubble_s {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .bubble_m {
+      width: 180px;
+      height: 180px;
+    }
+  
+    .bubble_l {
+      width: 300px;
+      height: 300px;
+    }
+  
+    .right-top {
+      top: -15px;
+      right: -15px; 
+    }
+  
+    .left-bottom {
+      bottom: -40px;
+      left: -40px; 
+    }
+  
+    .right-bottom {
+      bottom: -25px;
+      right: -25px; 
+    }
+  
+    .left-top {
+      top: -30px;
+      left: -30px; 
+    }
+  }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px); /* Sube 20 píxeles */
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}

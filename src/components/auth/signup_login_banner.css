@@ -4,14 +4,13 @@
   min-height: 100vh;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(135deg, #00acc1, #006064);
 }
 
 .title_descrition_page{
-  z-index: 20;
+  z-index: 100;
   position: absolute;
   width: 80%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content:space-around;
@@ -31,65 +30,4 @@
   font-size: 22px;
   padding: 0px;
   margin-top: 12px;
-}
-
-.bubble_s{
-  width: 200px;
-  height: 200px;
-  border-radius: 200px;
-  position: absolute;
-  z-index: 1;
-  animation: float 8s ease-in-out infinite;
-}
-
-.bubble_m{
-  width: 300px;
-  height: 300px;
-  border-radius: 200px;
-  position: absolute;
-  z-index: 0;
-  animation: float 10s ease-in-out infinite;
-}
-
-.bubble_l{
-  width: 500px;
-  height: 500px;
-  border-radius: 2000px;
-  position: absolute;
-  z-index: 0;
-  animation: float 14s ease-in-out infinite;
-}
-
-
-.right-top{
-  top: -30px;
-  right: -30px; 
-}
-
-.left-bottom{
-  bottom: -80px;
-  left: -80px; 
-}
-
-.right-bottom{
-  bottom: -50px;
-  right: -50px; 
-}
-
-.left-top{
-  top: -60px;
-  left: -60px; 
-}
-
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px); /* Sube 20 píxeles */
-  }
-  100% {
-    transform: translateY(0px);
-  }
 }

@@ -5,8 +5,8 @@ function Signup() {
   return (
     <AuthLayout
       heading="Crear cuenta"
-      footerText="¿Ya tienes cuenta?"
-      footerLinkTo="/login"
+      // footerText="¿Ya tienes cuenta?"
+      // footerLinkTo="/login"
       footerLinkLabel="Iniciar sesión"
     >
       <AuthForm submitLabel="Registrarse" variant="signup" />
