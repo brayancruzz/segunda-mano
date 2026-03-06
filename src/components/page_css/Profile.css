@@ -1,0 +1,59 @@
+.profile-header {
+    background: var(--teal-800, #00695C);
+    padding: 32px 16px;
+    text-align: center;
+}
+.profile-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 16px;
+    background: white;
+    border-radius: 12px;
+    margin-top: -40px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+.avatar {
+    font-size: 48px;
+}
+.user-info .name {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+.user-info .status {
+    display: block;
+    margin-top: 4px;
+}
+
+.actions-cards {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+.action-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.action-card:hover {
+    background: #f5f5f5;
+}
+.action-icon {
+    font-size: 32px;
+}
+.action-card .count {
+    display: block;
+    font-size: 0.875rem;
+    margin-top: 4px;
+}

@@ -19,6 +19,19 @@ function Onbording() {
   const [backFile, setBackFile] = useState(null);
   const [otp, setOtp] = useState("");
 
+  const titles = [
+    "",
+    "Validación de identidad",
+    "Verificación de código",
+    "Confirmación"
+  ];
+  const descriptions = [
+    "",
+    "Para continuar necesitamos validar tu identidad. Sube una foto de la parte frontal y trasera de tu cédula.",
+    "Ingresa el código enviado a tu correo",
+    ""
+  ];
+
   const goNext = () => {
     if (step === 1) {
       if (!frontFile || !backFile) {
@@ -27,8 +40,8 @@ function Onbording() {
       }
     }
     if (step === 2) {
-      if (!otp.trim()) {
-        error("Ingresa el código OTP");
+      if (otp.trim().length !== 4) {
+        error("Ingresa los 4 dígitos del código");
         return;
       }
       success("Código verificado");
@@ -48,21 +61,34 @@ function Onbording() {
     <section className='backgroundOnbording'>
       <BackgroundBubble />
       <div className='onbordingFormContainer blue_gray_900'>
-        <StepHeader step={step} total={totalSteps} onBack={goBack} />
+        <div className="content">
+          <StepHeader step={step} total={totalSteps} onBack={goBack} />
 
-        {/* content by step */}
-        {step === 1 && (
-          <IDUpload
-            frontFile={frontFile}
-            onFrontChange={setFrontFile}
-            backFile={backFile}
-            onBackChange={setBackFile}
-          />
-        )}
-        {step === 2 && <OTPForm otp={otp} onChange={setOtp} />}
-        {step === 3 && <Confirmation />}
+          {/* heading / description that changes per step */}
+          <h2 className="blue_gray_900" style={{ marginTop: 24 }}>{titles[step]}</h2>
+          {descriptions[step] && (
+            <p
+              className="blue_gray_800"
+              style={{ marginTop: 8, fontSize: step === 2 ? "14px" : undefined }}
+            >
+              {descriptions[step]}
+            </p>
+          )}
 
-        <div className="button-row" style={{ marginTop: 32 }}>
+          {/* content by step */}
+          {step === 1 && (
+            <IDUpload
+              frontFile={frontFile}
+              onFrontChange={setFrontFile}
+              backFile={backFile}
+              onBackChange={setBackFile}
+            />
+          )}
+          {step === 2 && <OTPForm otp={otp} onChange={setOtp} />}
+          {step === 3 && <Confirmation />}
+        </div>
+
+        <div className="button-row" style={{ marginTop: 32, alignSelf: "flex-end" }}>
           {step < totalSteps && (
             <button className="btn-secondary signup_login_btn" onClick={goNext}>
               Continuar

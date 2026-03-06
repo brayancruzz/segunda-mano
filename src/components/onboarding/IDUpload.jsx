@@ -23,13 +23,6 @@ function IDUpload({ frontFile, onFrontChange, backFile, onBackChange }) {
           />
         </div>
       </div>
-      <div className="info-card">
-        <strong>¿Por qué pedimos tu documento?</strong>
-        <p>
-          Validamos la identidad de todos los usuarios para crear un ambiente seguro
-          de compra y venta. Tu información está protegida y encriptada.
-        </p>
-      </div>
     </div>
   );
 }
