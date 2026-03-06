@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Onbording from "./pages/Onbording";
+import { Toaster } from "sileo"; // toast container
 
 function App() {
   const location = useLocation();
@@ -11,6 +12,9 @@ function App() {
 
   return (
     <>
+      {/* global toaster must be mounted once in the app */}
+      <Toaster position="top-right" />
+
       {!hideHeader && <Header />}
       <Routes>
         <Route path="/" element={<Home />} />

@@ -1,8 +1,42 @@
+import { useNavigate } from "react-router-dom";
+import { error, success, warning, info } from "../layout/Toast";
+
 function AuthForm({ submitLabel, variant }) {
   const isSignup = variant === "signup";
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value.trim();
+    const password = form.password.value;
+
+    if (!email || !password || (isSignup && (!form.nombre.value.trim() || !form.confirmar.value))) {
+      error("Todos los campos son obligatorios");
+      return;
+    }
+
+    if (isSignup) {
+      const nombre = form.nombre.value.trim();
+      const confirmar = form.confirmar.value;
+
+      if (password.length < 8) {
+        error("La contraseña debe tener al menos 8 caracteres");
+        return;
+      }
+
+      if (password !== confirmar) {
+        error("Las contraseñas no coinciden");
+        return;
+      }
+    }
+
+    navigate("/onbording");
+  };
 
   return (
-    <form className="auth_form">
+    <form className="auth_form" onSubmit={handleSubmit}>
       {isSignup && (
         <div className="form_field">
           <label htmlFor="nombre" className="blue_gray_800">
@@ -38,7 +72,7 @@ function AuthForm({ submitLabel, variant }) {
         <input
           id="password"
           type="password"
-          placeholder="Mínimo 6 caracteres"
+          placeholder="Mínimo 8 caracteres"
           className="input-search"
           required
         />
@@ -67,4 +101,3 @@ function AuthForm({ submitLabel, variant }) {
 }
 
 export default AuthForm;
-
