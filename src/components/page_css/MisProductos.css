@@ -2,4 +2,40 @@
     /* reuse existing layout rules */
 }
 
-/* additional styling could go here if needed */
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 400px;
+    margin: 24px auto;
+}
+.product-form label {
+    font-weight: 600;
+    color: #37474F;
+}
+.product-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+.product-form .btn-primary {
+    align-self: flex-end;
+    margin-top: 8px;
+}
+
+.user-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
+}
+.product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.delete-button {
+    font-size: 12px;
+    padding: 6px 12px;
+}

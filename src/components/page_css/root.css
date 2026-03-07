@@ -32,3 +32,8 @@ body {
   min-height: 100vh;
   background-color: #F5F5F5;
 }
+
+/* ensure content isn’t hidden behind fixed header */
+.main_container {
+  padding-top: 80px; /* adjust if header height changes */
+}

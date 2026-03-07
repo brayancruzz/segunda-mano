@@ -12,7 +12,12 @@ function AuthForm({ submitLabel, variant }) {
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    if (!email || !password || (isSignup && (!form.nombre.value.trim() || !form.confirmar.value))) {
+    // require phone on signup
+    if (
+      !email ||
+      !password ||
+      (isSignup && (!form.nombre.value.trim() || !form.confirmar.value || !form.phone.value.trim()))
+    ) {
       error("Todos los campos son obligatorios");
       return;
     }
@@ -20,6 +25,7 @@ function AuthForm({ submitLabel, variant }) {
     if (isSignup) {
       const nombre = form.nombre.value.trim();
       const confirmar = form.confirmar.value;
+      const phone = form.phone.value.trim();
 
       if (password.length < 8) {
         error("La contraseña debe tener al menos 8 caracteres");
@@ -30,9 +36,37 @@ function AuthForm({ submitLabel, variant }) {
         error("Las contraseñas no coinciden");
         return;
       }
-    }
 
-    navigate("/onbording");
+      // registration logic
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      if (users.find((u) => u.email === email)) {
+        error("Ya existe un usuario con ese correo");
+        return;
+      }
+      const id = "usr_" + Date.now();
+      const newUser = { id, nombre, email, phone, password };
+      users.push(newUser);
+      localStorage.setItem("users", JSON.stringify(users));
+      // set current user (without password)
+      const cur = { id, nombre, email, phone };
+      localStorage.setItem("user", JSON.stringify(cur));
+      success("Registro exitoso");
+      navigate("/profile");
+      return;
+    } else {
+      // login logic
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const found = users.find((u) => u.email === email && u.password === password);
+      if (!found) {
+        error("Credenciales inválidas");
+        return;
+      }
+      const cur = { id: found.id, nombre: found.nombre, email: found.email, phone: found.phone };
+      localStorage.setItem("user", JSON.stringify(cur));
+      success("Bienvenido, " + found.nombre);
+      navigate("/profile");
+      return;
+    }
   };
 
   return (
@@ -46,6 +80,20 @@ function AuthForm({ submitLabel, variant }) {
             id="nombre"
             type="text"
             placeholder="Tu nombre"
+            className="input-search"
+            required
+          />
+        </div>
+      )}
+      {isSignup && (
+        <div className="form_field">
+          <label htmlFor="phone" className="blue_gray_800">
+            Teléfono
+          </label>
+          <input
+            id="phone"
+            type="tel"
+            placeholder="+573XXXXXXXXX"
             className="input-search"
             required
           />
