@@ -5,12 +5,17 @@ import '../components/page_css/root.css';
 import '../components/ui/color.css';
 import '../components/page_css/Profile.css';
 
-// placeholder icons
 const UserIcon = () => (
   <div className="avatar">👤</div>
 );
 const PublicationsIcon = () => <span className="action-icon">📦</span>;
 const FavoritesIcon = () => <span className="action-icon">❤️</span>;
+
+const handleLogout = () => {
+    localStorage.removeItem('user');
+    setUser(null);
+    navigate('/');
+};
 
 function Profile() {
   const navigate = useNavigate();
@@ -37,11 +42,11 @@ function Profile() {
   }
 
   return (
-    <section className="main_container">
-      <div className="profile-header">
-        <h2 className="white">Mi perfil</h2>
+    <section className="main_container profile_page">
+      <div className="profile-header background_cyan_900">
+        <h2 className="headerText blue_gray_900">Mi perfil</h2>
       </div>
-      <div className="body_container">
+      <div className="profile_container">
         <div className="user-card">
           <UserIcon />
           <div className="user-info">
@@ -67,6 +72,10 @@ function Profile() {
               <span className="blue_gray_800 count">{favoritesCount}</span>
             </div>
           </div>
+        </div>
+
+        <div className="actionButtons">
+          <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
 
       </div>

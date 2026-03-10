@@ -12,7 +12,6 @@ function AuthForm({ submitLabel, variant }) {
     const email = form.email.value.trim();
     const password = form.password.value;
 
-    // require phone on signup
     if (
       !email ||
       !password ||
@@ -51,7 +50,7 @@ function AuthForm({ submitLabel, variant }) {
       const cur = { id, nombre, email, phone };
       localStorage.setItem("user", JSON.stringify(cur));
       success("Registro exitoso");
-      navigate("/profile");
+      navigate("/onbording");
       return;
     } else {
       // login logic

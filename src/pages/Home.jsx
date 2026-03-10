@@ -9,12 +9,6 @@ function Home() {
   return (
     <section className="main_container">
       <div className="body_container">
-        {/* debug info */}
-        <div style={{fontSize:12, color:'#999', marginBottom:12}}>
-          <div>user: {user ? user.substring(0,100) : 'null'}</div>
-          <div>products: {products ? products.substring(0,100) : 'null'}</div>
-        </div>
-
         <h2 className="blue_gray_900">Productos destacados</h2>
         <ProductList/>
       </div>

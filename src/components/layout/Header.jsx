@@ -24,11 +24,11 @@ function Header() {
         } else setUser(null);
     }, [location]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        setUser(null);
-        navigate('/');
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem('user');
+    //     setUser(null);
+    //     navigate('/');
+    // };
 
     return (
       <header className="header">
@@ -42,12 +42,9 @@ function Header() {
             {user ? (
               <>
                 <Link to="/profile"><button className="btn-secondary">Mi perfil</button></Link>
-                <Link to="/mis-productos"><button className="btn-secondary">Mis productos</button></Link>
-                <button className="btn-primary" onClick={handleLogout}>Cerrar sesión</button>
               </>
             ) : (
               <>
-                {/* use secondary style so login is visible on white header */}
                 <Link to="/login"><button className="btn-secondary">Iniciar sesión</button></Link>
                 <Link to="/signup"><button className="btn-primary">Registrarse</button></Link>
               </>

@@ -17,9 +17,10 @@
     min-height: 450px;
     position: relative; 
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 12px;
     padding: 32px;
-    /* make flex column so button can sit at bottom-right */
     display: flex;
     flex-direction: column;
 }
