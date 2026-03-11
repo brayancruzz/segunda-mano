@@ -1,34 +1,14 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import '../ui/btn_styles.css';
 import '../ui/color.css';
 import '../ui/input.css';
 import LogoS from '../logo/logo_s';
+import { useUser } from '../../userProcess/useUser';
 
 function Header() {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
-
-    const location = useLocation();
-    useEffect(() => {
-        const stored = localStorage.getItem('user');
-        if (stored) {
-            try {
-                setUser(JSON.parse(stored));
-            } catch (e) {
-                console.error('Failed to parse user from localStorage', e);
-                localStorage.removeItem('user');
-                setUser(null);
-            }
-        } else setUser(null);
-    }, [location]);
-
-    // const handleLogout = () => {
-    //     localStorage.removeItem('user');
-    //     setUser(null);
-    //     navigate('/');
-    // };
+    const { user } = useUser();
 
     return (
       <header className="header">

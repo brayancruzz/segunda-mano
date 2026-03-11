@@ -1,11 +1,32 @@
+import { useState, useEffect } from 'react';
 import Card from "../layout/Card";
 import '../ui/color.css';
 import './product_list.css';
-import { products as defaultProducts } from "../../data/products";
+import { products as fetchProducts } from "../../data/products"; 
 
-function ProductList({ products, onDelete }) {
-  // if explicit products passed use them, otherwise merge stored + default
+function ProductList({ products }) {
+  const [apiProducts, setApiProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const cargarDatos = async () => {
+      setLoading(true);
+      
+      const datosReales = await fetchProducts(); 
+      
+      setApiProducts(datosReales);
+      setLoading(false);
+    };
+
+    if (!products) {
+      cargarDatos();
+    } else {
+      setLoading(false);
+    }
+  }, [products]);
+
   let list = [];
+  
   if (products) {
     list = products;
   } else {
@@ -17,8 +38,11 @@ function ProductList({ products, onDelete }) {
       localStorage.removeItem('products');
       stored = [];
     }
-    // merge but don't mutate
-    list = [...stored, ...defaultProducts];
+    list = [...stored, ...apiProducts];
+  }
+
+  if (loading) {
+    return <p>Cargando productos de TuOfertaApp...</p>;
   }
 
   return (
@@ -30,6 +54,9 @@ function ProductList({ products, onDelete }) {
                 description={item.description}
                 image={item.image}
                 price={item.price}
+                url_contact={item.url_contact}
+                location={item.location}
+                seller={item.seller}
             />
         ))}
     </section>

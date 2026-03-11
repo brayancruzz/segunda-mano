@@ -3,13 +3,13 @@ import './card.css';
 import '../ui/color.css';
 import ProductDetailModal from '../modal/product_detail';
 
-function Card({ title, description, image, price }) {
+function Card({ title, description, image, price, url_contact, location, seller }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
-  const product = { title, description, image, price };
+  const product = { title, description, image, price, url_contact, location, seller };
 
   return (
     <>

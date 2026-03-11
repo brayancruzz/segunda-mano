@@ -2,14 +2,17 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthLayout from "../components/auth/AuthLayout";
 import AuthForm from "../components/auth/AuthForm";
+import { useUser } from "../userProcess/useUser";
 
 function Login() {
   const navigate = useNavigate();
+  const { user } = useUser();
+
   useEffect(() => {
-    if (localStorage.getItem('user')) {
+    if (user) {
       navigate('/profile');
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   return (
     <AuthLayout

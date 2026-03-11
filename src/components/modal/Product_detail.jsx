@@ -1,10 +1,11 @@
 import './product_detail.css';
 import '../ui/color.css';
+import { FaWhatsapp } from "react-icons/fa";
 
 function ProductDetailModal({ isOpen, onClose, product }) {
   if (!isOpen || !product) return null;
 
-  const { title, description, image, price } = product;
+  const { title, description, image, price, url_contact, location, seller } = product;
 
   return (
     <div className="product-modal__overlay" onClick={onClose}>
@@ -37,6 +38,15 @@ function ProductDetailModal({ isOpen, onClose, product }) {
             {price != null && (
               <p className="product-modal__price teal_800">{price}</p>
             )}
+            <a 
+              className="product-modal__contact-button btn-contact"
+              href={url_contact}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaWhatsapp className="whatsapp-icon" />
+               Contactar al vendedor
+            </a>
           </div>
         </div>
       </div>

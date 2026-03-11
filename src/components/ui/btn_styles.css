@@ -19,3 +19,25 @@
     border-radius: 200px;
     cursor: pointer;
 }
+
+.btn-contact {
+    font-size: 14px;
+    background-color: #128C7E;
+    color: white;
+    border: none;
+    height: 40px;
+    padding: 12px 26px;
+    border-radius: 200px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* BUTTON ADDITIONS */
+
+.whatsapp-icon{
+  font-size:20px;
+}

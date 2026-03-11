@@ -4,6 +4,7 @@ import ProductList from "../components/products/product_list";
 import '../components/page_css/root.css';
 import '../components/ui/color.css';
 import '../components/page_css/Profile.css';
+import { useUser } from "../userProcess/useUser";
 
 const UserIcon = () => (
   <div className="avatar">👤</div>
@@ -11,31 +12,27 @@ const UserIcon = () => (
 const PublicationsIcon = () => <span className="action-icon">📦</span>;
 const FavoritesIcon = () => <span className="action-icon">❤️</span>;
 
-const handleLogout = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-    navigate('/');
-};
-
 function Profile() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, logout } = useUser();
 
   const [productCount, setProductCount] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
+
+  const handleLogoutClick = () => {
+    logout();
+    navigate('/');
+  };
+
   useEffect(() => {
-    const stored = localStorage.getItem('user');
-    if (stored) {
-      const u = JSON.parse(stored);
-      setUser(u);
-      const all = JSON.parse(localStorage.getItem('products') || '[]');
-      setProductCount(all.filter(p => p.seller?.id === u.id).length);
-      // for now favorites not implemented, default 0
-      setFavoritesCount(0);
-    } else {
+    if (!user) {
       navigate('/login');
+    } else {
+      const all = JSON.parse(localStorage.getItem('products') || '[]');
+      setProductCount(all.filter(p => p.seller?.id === user.id).length);
+      setFavoritesCount(0);
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   if (!user) {
     return null; // or a spinner
@@ -75,7 +72,7 @@ function Profile() {
         </div>
 
         <div className="actionButtons">
-          <button onClick={handleLogout}>Cerrar sesión</button>
+          <button onClick={handleLogoutClick}>Cerrar sesión</button>
         </div>
 
       </div>
