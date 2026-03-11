@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import Header from "./components/layout/header";
+import Header from "./components/layout/Header";
 import Home from "./pages/home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -7,7 +7,7 @@ import Onbording from "./pages/Onbording";
 import Profile from "./pages/Profile";
 import MisProductos from "./pages/MisProductos";
 import Favoritos from "./pages/Favoritos";
-import { Toaster } from "sileo"; // toast container
+import { Toaster } from "sileo"; 
 
 function App() {
   const location = useLocation();
