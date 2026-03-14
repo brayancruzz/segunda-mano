@@ -1,70 +1,79 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { error, success, warning, info } from "../layout/Toast";
+import { error, success } from "../layout/Toast";
+import { loginUser, registerUser } from "../../api/auth.api";
+import { useAuth } from "../../userProcess/useAuth";
 
 function AuthForm({ submitLabel, variant }) {
   const isSignup = variant === "signup";
   const navigate = useNavigate();
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    const form = e.target;
-    const email = form.email.value.trim();
-    const password = form.password.value;
+    try {
+      const form = e.target;
+      const email = form.email.value.trim();
+      const password = form.password.value;
 
-    if (
-      !email ||
-      !password ||
-      (isSignup && (!form.nombre.value.trim() || !form.confirmar.value || !form.phone.value.trim()))
-    ) {
-      error("Todos los campos son obligatorios");
-      return;
-    }
-
-    if (isSignup) {
-      const nombre = form.nombre.value.trim();
-      const confirmar = form.confirmar.value;
-      const phone = form.phone.value.trim();
-
-      if (password.length < 8) {
-        error("La contraseña debe tener al menos 8 caracteres");
+      if (
+        !email ||
+        !password ||
+        (isSignup && (!form.nombre.value.trim() || !form.confirmar.value || !form.phone.value.trim()))
+      ) {
+        error("Todos los campos son obligatorios");
+        setIsLoading(false);
         return;
       }
 
-      if (password !== confirmar) {
-        error("Las contraseñas no coinciden");
-        return;
-      }
+      if (isSignup) {
+        const nombre = form.nombre.value.trim();
+        const confirmar = form.confirmar.value;
+        const phone = form.phone.value.trim();
 
-      // registration logic
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      if (users.find((u) => u.email === email)) {
-        error("Ya existe un usuario con ese correo");
-        return;
+        if (password.length < 8) {
+          error("La contraseña debe tener al menos 8 caracteres");
+          setIsLoading(false);
+          return;
+        }
+
+        if (password !== confirmar) {
+          error("Las contraseñas no coinciden");
+          setIsLoading(false);
+          return;
+        }
+
+        // Call backend registration endpoint
+        const result = await registerUser({
+          nombre,
+          email,
+          phone,
+          password,
+        });
+
+        // Store token and set user context
+        login(result.token, result.user);
+        success("Registro exitoso");
+        navigate("/onbording");
+      } else {
+        // Call backend login endpoint
+        console.log('Attempting login with email:', email);
+        const result = await loginUser(email, password);
+
+        // Store token and set user context
+        login(result.token, result.user);
+        success("Bienvenido, " + result.user?.nombre);
+        navigate("/profile");
       }
-      const id = "usr_" + Date.now();
-      const newUser = { id, nombre, email, phone, password };
-      users.push(newUser);
-      localStorage.setItem("users", JSON.stringify(users));
-      // set current user (without password)
-      const cur = { id, nombre, email, phone };
-      localStorage.setItem("user", JSON.stringify(cur));
-      success("Registro exitoso");
-      navigate("/onbording");
-      return;
-    } else {
-      // login logic
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      const found = users.find((u) => u.email === email && u.password === password);
-      if (!found) {
-        error("Credenciales inválidas");
-        return;
-      }
-      const cur = { id: found.id, nombre: found.nombre, email: found.email, phone: found.phone };
-      localStorage.setItem("user", JSON.stringify(cur));
-      success("Bienvenido, " + found.nombre);
-      navigate("/profile");
-      return;
+    } catch (err) {
+      console.error("Authentication error:", err.message);
+      const errorMsg = err.message || "Error en la autenticación";
+      error(errorMsg);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -81,6 +90,7 @@ function AuthForm({ submitLabel, variant }) {
             placeholder="Tu nombre"
             className="input-search"
             required
+            disabled={isLoading}
           />
         </div>
       )}
@@ -95,6 +105,7 @@ function AuthForm({ submitLabel, variant }) {
             placeholder="+573XXXXXXXXX"
             className="input-search"
             required
+            disabled={isLoading}
           />
         </div>
       )}
@@ -109,6 +120,7 @@ function AuthForm({ submitLabel, variant }) {
           placeholder="ejemplo@correo.com"
           className="input-search"
           required
+          disabled={isLoading}
         />
       </div>
 
@@ -122,6 +134,7 @@ function AuthForm({ submitLabel, variant }) {
           placeholder="Mínimo 8 caracteres"
           className="input-search"
           required
+          disabled={isLoading}
         />
       </div>
 
@@ -136,12 +149,13 @@ function AuthForm({ submitLabel, variant }) {
             placeholder="Repite tu contraseña"
             className="input-search"
             required
+            disabled={isLoading}
           />
         </div>
       )}
 
-      <button type="submit" className="btn-secondary signup_login_btn">
-        {submitLabel}
+      <button type="submit" className="btn-secondary signup_login_btn" disabled={isLoading}>
+        {isLoading ? "Procesando..." : submitLabel}
       </button>
     </form>
   );

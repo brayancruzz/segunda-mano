@@ -3,9 +3,6 @@ import '../components/page_css/root.css';
 import '../components/ui/color.css';
 
 function Home() {
-  const user = localStorage.getItem('user');
-  const products = localStorage.getItem('products');
-
   return (
     <section className="main_container">
       <div className="body_container">

@@ -7,6 +7,10 @@
     padding: 12px 26px;
     border-radius: 200px;
     cursor: pointer;
+    gap: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }  
 
 .btn-secondary {

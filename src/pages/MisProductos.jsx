@@ -4,82 +4,135 @@ import '../components/page_css/root.css';
 import '../components/ui/color.css';
 import '../components/page_css/MisProductos.css';
 import Card from "../components/layout/Card";
+import ProductEditModal from "../components/modal/ProductEditModal";
+import ProductCreateModal from "../components/modal/ProductCreateModal";
+import ConfirmationModal from "../components/modal/ConfirmationModal";
+import { getProducts, createProduct, updateProduct, deleteProduct } from "../api/products.api";
+import { useAuth } from "../userProcess/useAuth";
+import { FiMoreVertical } from "react-icons/fi";
 
 function MisProductos() {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const { user, isLoading: authLoading } = useAuth();
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    condition: "",
-    price: "",
-    image: "",
-    url_contact: "",
-    ubicacion: "",
-  });
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
+  // Modal states
+  const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [menuOpenId, setMenuOpenId] = useState(null);
+
+  // Initialize and fetch products
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (!storedUser) {
+    if (authLoading) return;
+
+    if (!user) {
       navigate('/login');
       return;
     }
-    let u;
+
+    fetchProducts();
+  }, [user, authLoading, navigate]);
+
+  // Fetch products from backend
+  const fetchProducts = async () => {
     try {
-      u = JSON.parse(storedUser);
-    } catch (e) {
-      console.error('Bad user JSON', e);
-      localStorage.removeItem('user');
-      navigate('/login');
-      return;
+      setIsLoading(true);
+      setError(null);
+      const data = await getProducts();
+
+      // Filter products by current user
+      const userProducts = data.filter(p => p.seller?.id === user?.id);
+    } catch (err) {
+      console.error('Failed to fetch products:', err);
+      setError('No se pudieron cargar los productos. Intenta más tarde.');
+    } finally {
+      setIsLoading(false);
     }
-    setUser(u);
-    loadProducts(u);
-  }, [navigate]);
-
-  const loadProducts = (u) => {
-    const all = JSON.parse(localStorage.getItem('products') || '[]');
-    const mine = all.filter(p => p.seller?.id === u.id);
-    setProducts(mine);
   };
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+  // Handle search
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    const filtered = products.filter(p =>
+      p.title.toLowerCase().includes(query) ||
+      p.description.toLowerCase().includes(query)
+    );
+    setFilteredProducts(filtered);
   };
 
-  const handlePublish = () => {
-    // basic validation
-    if (!form.title || !form.description || !form.price || !form.image || !form.url_contact || !form.ubicacion) {
-      alert('Todos los campos son obligatorios');
-      return;
+  // Open edit modal
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setEditModalOpen(true);
+    setMenuOpenId(null);
+  };
+
+  // Open delete confirmation
+  const handleDeleteClick = (product) => {
+    setSelectedProduct(product);
+    setDeleteModalOpen(true);
+    setMenuOpenId(null);
+  };
+
+  // Save edited product
+  const handleSaveProductEdit = async (updatedData) => {
+    if (!selectedProduct) return;
+
+    try {
+      await updateProduct(selectedProduct.id, updatedData);
+
+      // Refresh products list
+      await fetchProducts();
+      setEditModalOpen(false);
+      setSelectedProduct(null);
+    } catch (err) {
+      console.error('Error updating product:', err);
+      alert('Error al actualizar el producto');
     }
-    const all = JSON.parse(localStorage.getItem('products') || '[]');
-    const nextId = all.length ? Math.max(...all.map(p=>p.id)) + 1 : 1;
-    const newProduct = {
-      id: nextId,
-      title: form.title,
-      description: form.description,
-      condition: form.condition,
-      price: form.price,
-      image: form.image,
-      url_contact: form.url_contact,
-      product_id: 'prd_' + Date.now(),
-      seller: user,
-      ubicacion: form.ubicacion,
-    };
-    all.push(newProduct);
-    localStorage.setItem('products', JSON.stringify(all));
-    setProducts(prev => [...prev, newProduct]);
-    // clear form
-    setForm({ title: "", description: "", condition: "", price: "", image: "", url_contact: "", ubicacion: "" });
   };
 
-  const handleDelete = (id) => {
-    let all = JSON.parse(localStorage.getItem('products') || '[]');
-    all = all.filter(p => p.id !== id);
-    localStorage.setItem('products', JSON.stringify(all));
-    setProducts(prev => prev.filter(p => p.id !== id));
+  // Confirm delete product
+  const handleConfirmDelete = async () => {
+    if (!selectedProduct) return;
+
+    try {
+      await deleteProduct(selectedProduct.id);
+
+      // Refresh products list
+      await fetchProducts();
+      setDeleteModalOpen(false);
+      setSelectedProduct(null);
+    } catch (err) {
+      console.error('Error deleting product:', err);
+      alert('Error al eliminar el producto');
+    }
+  };
+
+  // Handle add new product (open modal)
+  const handleAddNew = () => {
+    setCreateModalOpen(true);
+  };
+
+  // Save new product
+  const handleSaveNewProduct = async (newProductData) => {
+    try {
+      await createProduct(newProductData);
+
+      // Refresh products list
+      await fetchProducts();
+      setCreateModalOpen(false);
+    } catch (err) {
+      console.error('Error creating product:', err);
+      alert('Error al crear el producto');
+    }
   };
 
   return (
@@ -87,41 +140,115 @@ function MisProductos() {
       <div className="body_container">
         <h2 className="blue_gray_900">Mis productos</h2>
 
-        <div className="product-form">
-          <label>Título</label>
-          <input name="title" value={form.title} onChange={handleChange} className="input-search" />
-          <label>Descripción</label>
-          <textarea name="description" value={form.description} onChange={handleChange} className="input-search" />
-          <label>Estado</label>
-          <input name="condition" value={form.condition} onChange={handleChange} className="input-search" />
-          <label>Precio</label>
-          <input name="price" value={form.price} onChange={handleChange} className="input-search" />
-          <label>Imagen (URL)</label>
-          <input name="image" value={form.image} onChange={handleChange} className="input-search" />
-          <label>URL de contacto</label>
-          <input name="url_contact" value={form.url_contact} onChange={handleChange} className="input-search" />
-          <label>Ubicación</label>
-          <input name="ubicacion" value={form.ubicacion} onChange={handleChange} className="input-search" />
-          <button className="btn-primary" onClick={handlePublish}>Publicar producto</button>
+        <div className="mis-productos-header">
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Buscar productos..."
+              value={searchQuery}
+              onChange={handleSearch}
+              className="input-search"
+            />
+          </div>
+          <button className="btn-secondary" onClick={handleAddNew}>
+            Agregar nuevo
+          </button>
         </div>
 
-        <div className="user-products">
-          {products.map(p => (
-            <div key={p.id} className="product-item">
-              <Card
-                title={p.title}
-                description={p.description}
-                image={p.image}
-                price={p.price}
-              />
-              <button className="btn-secondary delete-button" onClick={() => handleDelete(p.id)}>
-                Eliminar producto
-              </button>
-            </div>
-          ))}
-        </div>
+        {isLoading && (
+          <div className="loading-state">
+            <p className="blue_gray_800">Cargando productos...</p>
+          </div>
+        )}
 
+        {error && (
+          <div className="error-state">
+            <p className="blue_gray_800">{error}</p>
+          </div>
+        )}
+
+        {!isLoading && filteredProducts.length === 0 && (
+          <div className="empty-state">
+            <p className="blue_gray_800">No tienes productos publicados</p>
+          </div>
+        )}
+
+        {!isLoading && filteredProducts.length > 0 && (
+          <div className="user-products">
+            {filteredProducts.map(p => (
+              <div key={p.id} className="product-item">
+                <div className="product-card-wrapper">
+                  <Card
+                    title={p.title}
+                    description={p.description}
+                    image={p.image}
+                    price={p.price}
+                    url_contact={p.url_contact}
+                    location={p.ubicacion}
+                    seller={p.seller}
+                  />
+                  <div className="product-menu-container">
+                    <button
+                      className="product-menu-button"
+                      onClick={() => setMenuOpenId(menuOpenId === p.id ? null : p.id)}
+                      title="Opciones"
+                    >
+                      <FiMoreVertical size={20} />
+                    </button>
+                    {menuOpenId === p.id && (
+                      <div className="product-menu-dropdown">
+                        <button
+                          className="menu-option"
+                          onClick={() => handleEditClick(p)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="menu-option danger"
+                          onClick={() => handleDeleteClick(p)}
+                        >
+                          Eliminar
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      <ProductCreateModal
+        isOpen={createModalOpen}
+        onClose={() => {
+          setCreateModalOpen(false);
+        }}
+        onSave={handleSaveNewProduct}
+      />
+
+      <ProductEditModal
+        isOpen={editModalOpen}
+        onClose={() => {
+          setEditModalOpen(false);
+          setSelectedProduct(null);
+        }}
+        onSave={handleSaveProductEdit}
+        product={selectedProduct}
+      />
+
+      <ConfirmationModal
+        isOpen={deleteModalOpen}
+        onClose={() => {
+          setDeleteModalOpen(false);
+          setSelectedProduct(null);
+        }}
+        onConfirm={handleConfirmDelete}
+        title="Eliminar producto"
+        message="¿Seguro que deseas eliminar este producto?"
+        confirmText="Eliminar"
+        cancelText="Cancelar"
+      />
     </section>
   );
 }

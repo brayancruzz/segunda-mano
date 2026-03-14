@@ -1,16 +1,13 @@
+// This file is deprecated - use src/api/products.api.js instead
+// Kept for backward compatibility during migration
+import { getProducts } from '../api/products.api';
+
 export const products = async () => {
   try {
-    const response = await fetch('http://localhost:3001/api/products');
-    
-    if (!response.ok) {
-      throw new Error('Error de red al intentar obtener los productos');
-    }
-
-    const data = await response.json();
-    return data; 
-    
+    const data = await getProducts();
+    return data;
   } catch (error) {
-    console.error("Error en products:", error);
-    return []; 
+    console.error("Error fetching products:", error);
+    return [];
   }
 };

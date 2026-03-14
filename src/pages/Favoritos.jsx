@@ -1,16 +1,18 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import ProductList from "../components/products/product_list";
+import { useAuth } from "../userProcess/useAuth";
 import '../components/page_css/root.css';
 import '../components/ui/color.css';
 import '../components/page_css/Favoritos.css';
 
 function Favoritos() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+
   useEffect(() => {
-    const user = localStorage.getItem('user');
     if (!user) navigate('/login');
-  }, [navigate]);
+  }, [user, navigate]);
 
   return (
     <section className="main_container">

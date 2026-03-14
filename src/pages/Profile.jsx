@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import ProductList from "../components/products/product_list";
 import '../components/page_css/root.css';
 import '../components/ui/color.css';
 import '../components/page_css/Profile.css';
 import { useUser } from "../userProcess/useUser";
+import { getProducts } from "../api/products.api";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const UserIcon = () => (
   <div className="avatar">👤</div>
@@ -18,6 +19,7 @@ function Profile() {
 
   const [productCount, setProductCount] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleLogoutClick = () => {
     logout();
@@ -28,11 +30,23 @@ function Profile() {
     if (!user) {
       navigate('/login');
     } else {
-      const all = JSON.parse(localStorage.getItem('products') || '[]');
-      setProductCount(all.filter(p => p.seller?.id === user.id).length);
-      setFavoritesCount(0);
+      loadUserStats();
     }
   }, [user, navigate]);
+
+  const loadUserStats = async () => {
+    try {
+      setIsLoading(true);
+      const all = await getProducts();
+      const userProducts = all.filter(p => p.seller?.id === user.id);
+      setProductCount(userProducts.length);
+      setFavoritesCount(0); // TODO: Load from backend when favorites endpoint is available
+    } catch (err) {
+      console.error('Error loading user stats:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   if (!user) {
     return null; // or a spinner
@@ -59,7 +73,7 @@ function Profile() {
             <PublicationsIcon />
             <div>
               <span className="blue_gray_900">Mis publicaciones</span>
-              <span className="blue_gray_800 count">{productCount}</span>
+              <span className="blue_gray_800 count">{isLoading ? '-' : productCount}</span>
             </div>
           </div>
           <div className="action-card" onClick={() => navigate("/favoritos") }>
@@ -72,9 +86,12 @@ function Profile() {
         </div>
 
         <div className="actionButtons">
-          <button onClick={handleLogoutClick}>Cerrar sesión</button>
+          <button onClick={handleLogoutClick} className="btn-primary">
+              <FaSignOutAlt className="logout-icon" />
+              Cerrar sesión
+          </button>
         </div>
-
+        
       </div>
     </section>
   );
