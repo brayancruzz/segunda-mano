@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+.env.example
+
+# MD files
+.API_ARCHITECTURE.md
+.DEBUG_LOGIN.md
