@@ -7,7 +7,7 @@ import Card from "../components/layout/Card";
 import ProductEditModal from "../components/modal/ProductEditModal";
 import ProductCreateModal from "../components/modal/ProductCreateModal";
 import ConfirmationModal from "../components/modal/ConfirmationModal";
-import { getProducts, createProduct, updateProduct, deleteProduct } from "../api/products.api";
+import { getMyProducts, createProduct, updateProduct, deleteProduct } from "../api/products.api";
 import { useAuth } from "../userProcess/useAuth";
 import { FiMoreVertical } from "react-icons/fi";
 
@@ -39,15 +39,14 @@ function MisProductos() {
     fetchProducts();
   }, [user, authLoading, navigate]);
 
-  // Fetch products from backend
   const fetchProducts = async () => {
     try {
       setIsLoading(true);
       setError(null);
-      const data = await getProducts();
-
-      // Filter products by current user
-      const userProducts = data.filter(p => p.seller?.id === user?.id);
+      const data = await getMyProducts();
+      
+      setProducts(data || []);
+      setFilteredProducts(data || []);
     } catch (err) {
       console.error('Failed to fetch products:', err);
       setError('No se pudieron cargar los productos. Intenta más tarde.');
@@ -169,7 +168,10 @@ function MisProductos() {
 
         {!isLoading && filteredProducts.length === 0 && (
           <div className="empty-state">
-            <p className="blue_gray_800">No tienes productos publicados</p>
+            <p className="blue_gray_800">You don't have any products yet</p>
+            <button className="btn-secondary" onClick={handleAddNew}>
+              Create your first product
+            </button>
           </div>
         )}
 
@@ -184,8 +186,10 @@ function MisProductos() {
                     image={p.image}
                     price={p.price}
                     url_contact={p.url_contact}
-                    location={p.ubicacion}
+                    location={p.location}
                     seller={p.seller}
+                    status={p.status}
+                    view="detail"
                   />
                   <div className="product-menu-container">
                     <button

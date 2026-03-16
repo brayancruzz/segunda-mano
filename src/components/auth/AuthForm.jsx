@@ -65,7 +65,7 @@ function AuthForm({ submitLabel, variant }) {
 
         // Store token and set user context
         login(result.token, result.user);
-        success("Bienvenido, " + result.user?.nombre);
+        success("Bienvenido, " + result.user?.first_name || "usuario");
         navigate("/profile");
       }
     } catch (err) {

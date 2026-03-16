@@ -49,21 +49,22 @@ function Profile() {
   };
 
   if (!user) {
-    return null; // or a spinner
+    return null;
   }
 
   return (
     <section className="main_container profile_page">
-      <div className="profile-header background_cyan_900">
+      <div className="profile-header background_cyan_800">
         <h2 className="headerText blue_gray_900">Mi perfil</h2>
       </div>
       <div className="profile_container">
         <div className="user-card">
           <UserIcon />
           <div className="user-info">
-            <span className="blue_gray_900 name">{user.nombre}</span>
+            <span className="blue_gray_900 name">{user.first_name} {user.last_name}</span>
+            <span className="blue_gray_800 email">{user.email}</span>
             <span className="blue_gray_800 status">
-              {user.verified ? "Verificado" : "Pendiente"}
+              {user.verified == true ? <span className="verified font-white background_green_500">Verificado</span> : <span className="pending font-white background_red_500">Pendiente</span>}
             </span>
           </div>
         </div>

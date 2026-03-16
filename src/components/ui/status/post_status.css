@@ -1,0 +1,20 @@
+/* Post Status Badge Styles */
+
+.post-status {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.post-status:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}

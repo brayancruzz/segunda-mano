@@ -46,7 +46,7 @@ function ProductList() {
             image={item.image}
             price={item.price}
             url_contact={item.url_contact}
-            location={item.ubicacion || item.location}
+            location={item.location}
             seller={item.seller}
           />
         ))

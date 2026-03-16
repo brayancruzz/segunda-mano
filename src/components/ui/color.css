@@ -15,6 +15,28 @@
 }
 
 
+/* GREEN */
+
+/* Green text colors */
+
+.green_500 {
+    color: #4CAF50;
+}
+
+.green_600 {
+    color: #43A047;
+}
+
+.green_700 {
+    color: #388E3C;
+}
+
+/* Green background colors */
+
+.background_green_500 {
+    background-color: #4CAF50;
+}
+
 /* CYAN */
 
 .background_cyan_500{
@@ -45,4 +67,26 @@
 
 .font-white  {
     color: white;
+}
+
+/* RED */
+
+/* Red text colors */
+
+.red_500 {
+    color: #f44336;
+}
+
+.red_600 {
+    color: #e53935;
+}
+
+.red_700 {
+    color: #d32f2f;
+}
+
+/* Red background colors */
+
+.background_red_500 {
+    background-color: #f44336;
 }

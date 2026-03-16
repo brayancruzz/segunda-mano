@@ -37,13 +37,41 @@
 .avatar {
     font-size: 48px;
 }
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
 .user-info .name {
     font-size: 1.25rem;
     font-weight: 600;
 }
+
+.user-info .email {
+    font-size: 12px;
+}
+
 .user-info .status {
     display: block;
+    font-size: 12px;
     margin-top: 4px;
+}
+
+.user-info .verified {
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 200px;
+}
+
+.user-info .pending {
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 200px;
+}
+
+.user-info .pending {
+    font-weight: 500;
 }
 
 .actions-cards {

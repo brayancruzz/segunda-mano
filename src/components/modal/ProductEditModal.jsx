@@ -2,29 +2,71 @@ import { useState, useEffect } from 'react';
 import './product_edit_modal.css';
 import '../ui/color.css';
 
+// Temporary category data - will be replaced with API endpoint
+const categories = [
+  { id: 1, title: "Electronics" },
+  { id: 2, title: "Home" },
+  { id: 3, title: "Vehicles" },
+  { id: 4, title: "Clothing" }
+];
+
+// Status options - only allow users to select these
+const statusOptions = [
+  { value: "draft", label: "Draft" },
+  { value: "active", label: "Active" },
+  { value: "inactive", label: "Inactive" }
+];
+
+// Allowed statuses for editing
+const allowedEditableStatuses = ["draft", "active", "inactive"];
+
+const normalizePhoneNumber = (phone) => {
+  if (!phone) return '';
+  
+  const digits = phone.replace(/\D/g, '');
+  
+  if (!digits) return '';
+  
+  if (digits.startsWith('57')) {
+    return digits;
+  }
+  
+  let normalized = digits.startsWith('0') ? digits.substring(1) : digits;
+  
+  return '57' + normalized;
+};
+
+const isValidPhoneNumber = (phone) => {
+  const normalized = normalizePhoneNumber(phone);
+  return /^57\d{10}$/.test(normalized);
+};
+
 function ProductEditModal({ isOpen, onClose, onSave, product }) {
   const [form, setForm] = useState({
     title: "",
     description: "",
-    condition: "",
     price: "",
-    image: "",
-    url_contact: "",
-    ubicacion: "",
+    category_id: "",
+    location: "",
+    phone_number: "",
+    image_url: "",
+    status: "draft",
   });
 
   const [isSaving, setIsSaving] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
 
   useEffect(() => {
     if (product) {
       setForm({
         title: product.title || "",
         description: product.description || "",
-        condition: product.condition || "",
         price: product.price || "",
-        image: product.image || "",
-        url_contact: product.url_contact || "",
-        ubicacion: product.ubicacion || "",
+        category_id: product.category_id || "",
+        location: product.location || "",
+        phone_number: product.phone_number || "",
+        image_url: product.image_url || "",
+        status: product.status || "draft",
       });
     }
   }, [product, isOpen]);
@@ -33,23 +75,41 @@ function ProductEditModal({ isOpen, onClose, onSave, product }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === 'phone_number' && phoneError) {
+      setPhoneError('');
+    }
+    
     setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async () => {
-    // Basic validation
-    if (!form.title || !form.description || !form.price || !form.image || !form.url_contact || !form.ubicacion) {
-      alert('Todos los campos son obligatorios');
+    if (!form.title || !form.description || !form.price || !form.category_id) {
+      alert('Title, Description, Price, and Category are required');
       return;
     }
 
+    if (form.phone_number && !isValidPhoneNumber(form.phone_number)) {
+      setPhoneError('Please enter a valid Colombian phone number');
+      return;
+    }
+
+    const normalizedForm = {
+      ...form,
+      phone_number: form.phone_number ? normalizePhoneNumber(form.phone_number) : ''
+    };
+
     setIsSaving(true);
     try {
-      await onSave(form);
+      await onSave(normalizedForm);
+      setPhoneError('');
     } finally {
       setIsSaving(false);
     }
   };
+
+  // Check if current status is editable
+  const isStatusEditable = allowedEditableStatuses.includes(form.status);
 
   return (
     <div className="product-edit-modal__overlay" onClick={onClose}>
@@ -70,79 +130,121 @@ function ProductEditModal({ isOpen, onClose, onSave, product }) {
 
           <div className="product-edit-modal__form">
             <div className="form-group">
-              <label className="blue_gray_900">Título</label>
+              <label className="blue_gray_900">Título *</label>
               <input
                 type="text"
                 name="title"
                 value={form.title}
                 onChange={handleChange}
                 className="input-search"
+                required
               />
             </div>
 
             <div className="form-group">
-              <label className="blue_gray_900">Descripción</label>
+              <label className="blue_gray_900">Descripción *</label>
               <textarea
                 name="description"
                 value={form.description}
                 onChange={handleChange}
                 className="input-search"
+                required
               />
             </div>
 
             <div className="form-group">
-              <label className="blue_gray_900">Estado</label>
+              <label className="blue_gray_900">Precio *</label>
               <input
-                type="text"
-                name="condition"
-                value={form.condition}
-                onChange={handleChange}
-                className="input-search"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="blue_gray_900">Precio</label>
-              <input
-                type="text"
+                type="number"
                 name="price"
                 value={form.price}
                 onChange={handleChange}
                 className="input-search"
+                placeholder="0"
+                required
               />
             </div>
 
             <div className="form-group">
-              <label className="blue_gray_900">Imagen (URL)</label>
-              <input
-                type="text"
-                name="image"
-                value={form.image}
+              <label className="blue_gray_900">Categoría *</label>
+              <select
+                name="category_id"
+                value={form.category_id}
                 onChange={handleChange}
                 className="input-search"
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="blue_gray_900">URL de contacto</label>
-              <input
-                type="text"
-                name="url_contact"
-                value={form.url_contact}
-                onChange={handleChange}
-                className="input-search"
-              />
+                required
+              >
+                <option value="">Seleccionar categoría</option>
+                {categories.map(cat => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.title}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="form-group">
               <label className="blue_gray_900">Ubicación</label>
               <input
                 type="text"
-                name="ubicacion"
-                value={form.ubicacion}
+                name="location"
+                value={form.location}
                 onChange={handleChange}
                 className="input-search"
               />
+            </div>
+
+            <div className="form-group">
+              <label className="blue_gray_900">Número de teléfono</label>
+              <input
+                type="text"
+                name="phone_number"
+                value={form.phone_number}
+                onChange={handleChange}
+                className="input-search"
+                placeholder="573001234567"
+              />
+              {phoneError && (
+                <p style={{ color: '#dc3545', fontSize: '12px', marginTop: '4px' }}>
+                  {phoneError}
+                </p>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label className="blue_gray_900">URL de imagen</label>
+              <input
+                type="text"
+                name="image_url"
+                value={form.image_url}
+                onChange={handleChange}
+                className="input-search"
+                placeholder="https://..."
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="blue_gray_900">Estado</label>
+              {isStatusEditable ? (
+                <select
+                  name="status"
+                  value={form.status}
+                  onChange={handleChange}
+                  className="input-search"
+                >
+                  {statusOptions.map(status => (
+                    <option key={status.value} value={status.value}>
+                      {status.label}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <div className="status-readonly">
+                  <p className="blue_gray_900" style={{ margin: 0, padding: '8px 12px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+                    {form.status} (under review)
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
